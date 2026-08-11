@@ -1,4 +1,8 @@
 
+const sketch = document.querySelector('.sketch');
+const ctx = sketch.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
 const Display = (function(){
 	const _Display = {
 		text: (msg, x, y, size, options={}) => {
