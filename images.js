@@ -1,4 +1,45 @@
 
+const Display = (function(){
+	const _Display = {
+		text: (msg, x, y, size, options={}) => {
+			options = {
+				title: false, 
+				align: 'center', 
+				lineSpacing: 24, 
+				letterSpacing: 1,
+				format: '',
+				font: "Silkscreen",
+				...options
+			};
+			// Provides a way to do newline text cause it's not... there some for reason?
+			ctx.letterSpacing = `${options.letterSpacing}px`
+			ctx.textAlign = options.align;
+			ctx.strokeStyle = 'red'
+			const lines = msg.split("\n");
+			for (let i = 0; i < lines.length; i ++){
+				const isSmall = lines[i].startsWith('-#');
+				const line = isSmall ? lines[i].split("-#")[1] : lines[i];
+				ctx.font = `${options.format} ${isSmall ? size / 1.2 : size}px ${options.font}`;
+				ctx.fillText(line, x, y + i * options.lineSpacing, width);
+			}
+		},
+		capitalize: (txt) => txt[0].toUpperCase() + txt.slice(1),
+		pixelArt: (bitmap, palette, pixelSize, x=0, y=0) => {
+		    for (let i = 0; i < bitmap.length; i ++){
+		        for (let j = 0; j < bitmap[i].length; j ++){
+		            if (bitmap[i][j] !== ' '){
+		            	pushMatrix();
+		            	translate(x, y)
+		                fill(palette[bitmap[i][j]]);
+		                rect(Math.floor(j * pixelSize), Math.floor(i * pixelSize), pixelSize, pixelSize);
+		                popMatrix();
+		            }
+		        }
+		    }
+		},
+	};
+	return _Display;
+})();
 // IMAGES \\
 const imgs = {
   cutscenes: {
