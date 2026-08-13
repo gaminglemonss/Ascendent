@@ -10145,7 +10145,7 @@ class Knight extends Enemy {
 		this.type = config.type;
 		this.weapon = this.type === 1 ? "axe" : "spear";
 		
-		this.maxHealth = 300;
+		this.maxHealth = 170;
 		this.health = this.maxHealth;
 	}
 	display(){
